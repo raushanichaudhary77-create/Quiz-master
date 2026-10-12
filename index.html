@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="QUIZ MASTER — a futuristic, premium quiz experience with categories, difficulty modes, and local leaderboard tracking."
+    />
+    <title>QUIZ MASTER</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="topbar">
+        <div class="brand" aria-label="Quiz Master logo">
+          <span class="brand-mark">
+            <span class="brand-core"></span>
+          </span>
+          <span class="brand-text">QUIZ MASTER</span>
+        </div>
+
+        <nav class="main-nav" aria-label="Main navigation">
+          <button class="nav-link active" data-view="landing">Home</button>
+          <button class="nav-link" data-view="category">Categories</button>
+          <button class="nav-link" data-view="leaderboard">Leaderboard</button>
+          <button class="nav-link" data-view="about">About</button>
+        </nav>
+
+        <button
+          class="icon-button sound-toggle"
+          id="sound-toggle"
+          type="button"
+          aria-label="Toggle sound"
+          aria-pressed="false"
+          title="Sound disabled by default"
+        >
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M11 5 6 9H3v6h3l5 4V5Z"></path>
+            <path d="M15.5 8.5a5 5 0 0 1 0 7"></path>
+            <path d="M18.5 5.5a9 9 0 0 1 0 13"></path>
+          </svg>
+        </button>
+      </header>
+
+      <main class="app-main">
+        <section id="landing" class="screen active" aria-labelledby="hero-title">
+          <div class="hero-panel">
+            <div class="hero-copy reveal">
+              <p class="eyebrow">NEXT-GEN INTELLIGENCE PLATFORM</p>
+              <h1 id="hero-title">CHALLENGE YOUR MIND.</h1>
+              <p class="subtitle">
+                Dive into a premium, adrenaline-fueled quiz experience built for curious minds.
+                Explore a carefully curated set of challenging questions across programming,
+                computer science, science, and general knowledge.
+              </p>
+
+              <div class="cta-row">
+                <button class="primary-button" data-action="start-quiz">Start Your Quiz</button>
+                <button class="secondary-button" data-view="category">Explore Categories</button>
+              </div>
+
+              <div class="stats-strip" aria-label="Quiz statistics overview">
+                <article class="mini-stat">
+                  <strong id="total-questions-stat">60</strong>
+                  <span>Questions</span>
+                </article>
+                <article class="mini-stat">
+                  <strong>4</strong>
+                  <span>Categories</span>
+                </article>
+                <article class="mini-stat">
+                  <strong>3</strong>
+                  <span>Difficulty tiers</span>
+                </article>
+              </div>
+            </div>
+
+            <div class="hero-visual reveal" aria-hidden="true">
+              <div class="orb orb-one"></div>
+              <div class="orb orb-two"></div>
+              <div class="dashboard-card card-main">
+                <div class="card-header">
+                  <span class="pulse-dot"></span>
+                  <span>Live Intelligence</span>
+                </div>
+                <div class="score-ring">
+                  <span>94%</span>
+                </div>
+                <ul class="card-metrics">
+                  <li><span>Correct</span><strong>47/50</strong></li>
+                  <li><span>Streak</span><strong>12</strong></li>
+                  <li><span>Mode</span><strong>Elite</strong></li>
+                </ul>
+              </div>
+              <div class="dashboard-card card-float card-floating-one">
+                <span>Accuracy</span>
+                <strong>+18%</strong>
+              </div>
+              <div class="dashboard-card card-float card-floating-two">
+                <span>Rank</span>
+                <strong>#3</strong>
+              </div>
+            </div>
+          </div>
+
+          <section class="section-block categories-showcase reveal" aria-labelledby="categories-heading">
+            <div class="section-heading row-between">
+              <div>
+                <p class="eyebrow">POPULAR MODES</p>
+                <h2 id="categories-heading">Choose your arena</h2>
+              </div>
+              <button class="text-button" data-view="category">View all</button>
+            </div>
+
+            <div class="category-grid landing-grid" id="landing-category-grid"></div>
+          </section>
+        </section>
+
+        <section id="category" class="screen" aria-labelledby="category-title">
+          <div class="section-heading reveal">
+            <div>
+              <p class="eyebrow">SELECT A DOMAIN</p>
+              <h2 id="category-title">Train your focus</h2>
+            </div>
+          </div>
+          <div class="category-grid full-grid" id="category-grid"></div>
+        </section>
+
+        <section id="difficulty" class="screen" aria-labelledby="difficulty-title">
+          <div class="panel-card reveal" style="max-width: 980px; margin: 0 auto;">
+            <div class="section-heading row-between">
+              <div>
+                <p class="eyebrow">CONFIGURE MODE</p>
+                <h2 id="difficulty-title">Pick your challenge level</h2>
+              </div>
+              <button class="text-button" data-action="back-to-category">Back</button>
+            </div>
+
+            <div class="difficulty-grid" id="difficulty-grid"></div>
+
+            <div class="difficulty-controls">
+              <label class="field-label" for="question-count">Number of questions</label>
+              <div class="range-wrap">
+                <input id="question-count" type="range" min="5" max="10" step="1" value="7" />
+                <span id="question-count-value">7</span>
+              </div>
+            </div>
+
+            <div class="panel-actions">
+              <button class="secondary-button" data-action="back-to-category">Change Category</button>
+              <button class="primary-button" id="start-quiz-button">Start Quiz</button>
+            </div>
+          </div>
+        </section>
+
+        <section id="quiz" class="screen" aria-live="polite">
+          <div class="quiz-shell reveal">
+            <header class="quiz-topbar">
+              <div>
+                <p class="eyebrow" id="quiz-category-label">Programming</p>
+                <h2 id="quiz-difficulty-label">Easy</h2>
+              </div>
+              <div class="quiz-actions">
+                <button class="secondary-button small-button" id="quit-quiz-button" type="button">Quit</button>
+              </div>
+            </header>
+
+            <div class="quiz-progress-wrap">
+              <div class="progress-meta">
+                <span id="question-counter">QUESTION 01 / 05</span>
+                <span id="score-display">Score: 0</span>
+              </div>
+              <div class="progress-bar" aria-hidden="true">
+                <span id="progress-bar-fill"></span>
+              </div>
+            </div>
+
+            <div class="quiz-body">
+              <aside class="timer-panel">
+                <div class="timer-ring" id="timer-ring" role="timer" aria-live="polite" aria-label="Question timer">
+                  <svg viewBox="0 0 120 120" aria-hidden="true">
+                    <circle class="track" cx="60" cy="60" r="50"></circle>
+                    <circle class="progress" cx="60" cy="60" r="50"></circle>
+                  </svg>
+                  <div class="timer-center">
+                    <strong id="timer-seconds">15</strong>
+                    <span>s</span>
+                  </div>
+                </div>
+              </aside>
+
+              <div class="question-panel">
+                <div class="question-box">
+                  <h3 id="question-text">Question text</h3>
+                </div>
+                <div class="answer-grid" id="answer-grid" aria-label="Answer choices"></div>
+                <div id="feedback-box" class="feedback-box" aria-live="polite"></div>
+                <div class="panel-actions quiz-actions-row">
+                  <button class="primary-button hidden" id="next-question-button" type="button">Next Question</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="results" class="screen" aria-labelledby="results-title">
+          <div class="results-shell reveal">
+            <div class="results-header row-between">
+              <div>
+                <p class="eyebrow">SESSION COMPLETE</p>
+                <h2 id="results-title">Performance dashboard</h2>
+              </div>
+            </div>
+
+            <div class="results-top">
+              <div class="score-panel">
+                <div class="overall-score-ring" id="results-score-ring">
+                  <div class="score-ring-center">
+                    <strong id="final-score-percent">0%</strong>
+                    <span>Accuracy</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="result-summary">
+                <div class="summary-row">
+                  <span>Final score</span>
+                  <strong id="final-score">0 / 0</strong>
+                </div>
+                <div class="summary-row">
+                  <span>Correct</span>
+                  <strong id="correct-count">0</strong>
+                </div>
+                <div class="summary-row">
+                  <span>Incorrect</span>
+                  <strong id="incorrect-count">0</strong>
+                </div>
+                <div class="summary-row">
+                  <span>Skipped</span>
+                  <strong id="skipped-count">0</strong>
+                </div>
+                <div class="summary-row">
+                  <span>Total time</span>
+                  <strong id="total-time">0s</strong>
+                </div>
+                <div class="summary-row">
+                  <span>Avg. response</span>
+                  <strong id="avg-response-time">0s</strong>
+                </div>
+              </div>
+            </div>
+
+            <div class="message-card" id="performance-message">Ready for another round.</div>
+
+            <div class="results-actions">
+              <button class="primary-button" id="play-again-button">Play Again</button>
+              <button class="secondary-button" id="change-category-button">Change Category</button>
+              <button class="tertiary-button" id="review-answers-button">Review Answers</button>
+            </div>
+
+            <div class="breakdown-panel" id="answer-breakdown"></div>
+          </div>
+        </section>
+
+        <section id="leaderboard" class="screen" aria-labelledby="leaderboard-title">
+          <div class="leaderboard-shell reveal">
+            <div class="section-heading row-between">
+              <div>
+                <p class="eyebrow">LOCAL STANDINGS</p>
+                <h2 id="leaderboard-title">Hall of scores</h2>
+              </div>
+            </div>
+
+            <div class="leaderboard-notice">
+              Leaderboard data is stored locally in this browser only and is not shared between users or devices.
+            </div>
+
+            <div class="leaderboard-layout">
+              <div class="panel-card leaderboard-form-card">
+                <label class="field-label" for="display-name">Display name</label>
+                <div class="input-row">
+                  <input id="display-name" type="text" maxlength="20" placeholder="Enter your name" />
+                  <button class="primary-button small-button" id="save-score-button">Save Result</button>
+                </div>
+                <div class="stats-grid" id="personal-stats"></div>
+              </div>
+
+              <div class="panel-card leaderboard-table-wrap">
+                <div class="table-header row-between">
+                  <h3>Top performers</h3>
+                  <button class="secondary-button small-button" id="clear-history-button">Clear History</button>
+                </div>
+                <div class="table-wrapper">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Category</th>
+                        <th>Difficulty</th>
+                        <th>Score</th>
+                        <th>Date</th>
+                      </tr>
+                    </thead>
+                    <tbody id="leaderboard-body"></tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="about" class="screen" aria-labelledby="about-title">
+          <div class="about-shell reveal">
+            <div class="section-heading">
+              <p class="eyebrow">ABOUT</p>
+              <h2 id="about-title">Designed for sharp minds</h2>
+            </div>
+            <div class="about-grid">
+              <article class="panel-card">
+                <h3>What makes it premium</h3>
+                <p>
+                  QUIZ MASTER blends cinematic dark-mode visuals, thoughtful interaction design,
+                  and reliable game logic to create a quiz experience that feels as polished as it is fun.
+                </p>
+              </article>
+              <article class="panel-card">
+                <h3>Built for focus</h3>
+                <p>
+                  The experience is optimized for responsive layouts, keyboard input, clear feedback,
+                  and accessible interactions without sacrificing visual elegance.
+                </p>
+              </article>
+              <article class="panel-card">
+                <h3>Local-first</h3>
+                <p>
+                  Progress, leaderboard results, and personal stats live in localStorage so the app runs instantly
+                  without a backend or external service.
+                </p>
+              </article>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <div class="brand small-brand">
+          <span class="brand-mark">
+            <span class="brand-core"></span>
+          </span>
+          <span class="brand-text">QUIZ MASTER</span>
+        </div>
+        <nav class="footer-links" aria-label="Footer navigation">
+          <button class="text-button" data-view="landing">Home</button>
+          <button class="text-button" data-view="category">Categories</button>
+          <button class="text-button" data-view="leaderboard">Leaderboard</button>
+          <button class="text-button" data-view="about">About</button>
+        </nav>
+      </footer>
+    </div>
+
+    <div id="toast" class="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+
+    <div class="modal-backdrop hidden" id="confirm-modal" aria-hidden="true">
+      <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <h3 id="modal-title">Confirm action</h3>
+        <p id="modal-message">Are you sure?</p>
+        <div class="modal-actions">
+          <button class="secondary-button" id="modal-cancel" type="button">Cancel</button>
+          <button class="primary-button" id="modal-confirm" type="button">Confirm</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
